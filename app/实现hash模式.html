@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <a href="#/home">Home</a>
+    <a href="#/about">About</a>
+
+    <script>
+      const routes = {
+        '/home': '<h1>Home</h1>',
+        '/about': '<h1>About</h1>',
+      };
+
+      function render() {
+        const hash = location.hash.replace('#', '') || '/home';
+        const content = routes[hash] || '<h1>404</h1>';
+        document.getElementById('app').innerHTML = content;
+      }
+
+      window.addEventListener('hashchange', render);
+      window.addEventListener('load', render);
+    </script>
+  </body>
+</html>

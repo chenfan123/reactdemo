@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <a href="/home">Home</a>
+    <a href="/about">About</a>
+
+    <script>
+      const routes = {
+        '/home': '<h1>Home</h1>',
+        '/about': '<h1>About</h1>',
+      };
+
+      function navigate(path) {
+        window.history.pushState({}, '', path);
+        render();
+      }
+
+      function render() {
+        const path = location.pathname || '/home';
+        const content = routes[path] || '<h1>404</h1>';
+        document.getElementById('app').innerHTML = content;
+      }
+
+      window.addEventListener('load', render);
+
+      window.addEventListener('popstate', render);
+
+      document.addEventListener('click', (e) => {
+        if (e.target.matches('a')) {
+          e.preventDefault();
+          navigate(e.target.href);
+        }
+      });
+    </script>
+  </body>
+</html>
